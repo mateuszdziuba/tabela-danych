@@ -1,0 +1,21 @@
+{
+  "name": "data-table-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body": "^5.1.0",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "parser": "^0.1.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.3"
+  }
+}
