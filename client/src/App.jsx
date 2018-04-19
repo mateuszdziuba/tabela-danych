@@ -22,7 +22,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("https://tabeladanych.herokuapp.com/api/")
+    fetch("/api/")
       .then(response => response.json())
       .then(data =>
         this.setState({
@@ -39,7 +39,7 @@ class App extends Component {
         searchfield: event.target.value
       },
       () => {
-        fetch("https://tabeladanych.herokuapp.com/api/", {
+        fetch("/api/", {
           method: "post",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -65,7 +65,7 @@ class App extends Component {
 
   onPageChange = (currentPage) => {
     this.setState({ currentPage }, () => {
-      fetch("https://tabeladanych.herokuapp.com/api/", {
+      fetch("/api/", {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -91,7 +91,7 @@ class App extends Component {
       head,
       order
     });
-    fetch("https://tabeladanych.herokuapp.com/api/", {
+    fetch("/api/", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
