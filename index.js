@@ -68,9 +68,11 @@ app.post('/api/', (req, res) => {
     };
   };
 
+  console.log(head, order);
+
   res.json({
     data:
-      head === ''
+      head === '' || head === undefined
         ? copy.slice(first, second)
         : copy.sort(compareValues(head, order)).slice(first, second),
     page,
