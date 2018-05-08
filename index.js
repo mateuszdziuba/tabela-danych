@@ -37,7 +37,7 @@ app.post('/api/', (req, res) => {
 
   const postCount = copy.length;
   const perPage = 10;
-  let page = currentPage;
+  let page = currentPage || 1;
   const pageCount = Math.ceil(postCount / perPage);
 
   let first = parseInt();
