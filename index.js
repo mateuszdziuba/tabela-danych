@@ -1,9 +1,9 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const path = require('path')
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const path = require('path');
 
-const data = require("./data");
+const data = require('./data');
 
 const app = express();
 
@@ -12,7 +12,7 @@ app.use(cors());
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-app.get("/api/", (req, res) => {
+app.get('/api/', (req, res) => {
   const postCount = data.users.length;
   const perPage = 10;
   let page = 1;
@@ -25,13 +25,8 @@ app.get("/api/", (req, res) => {
   });
 });
 
-app.post("/api/", (req, res) => {
-  const {
-    head,
-    order,
-    searchfield,
-    currentPage
-  } = req.body;
+app.post('/api/', (req, res) => {
+  const { head, order, searchfield, currentPage } = req.body;
 
   const filteredUsers = data.users.filter(user => {
     return JSON.stringify(user)
@@ -42,7 +37,7 @@ app.post("/api/", (req, res) => {
 
   const postCount = copy.length;
   const perPage = 10;
-  let page = currentPage || 1;
+  let page = currentPage;
   const pageCount = Math.ceil(postCount / perPage);
 
   let first = parseInt();
@@ -54,27 +49,30 @@ app.post("/api/", (req, res) => {
 
   let second = page * perPage;
 
-  const compareValues = (key, order = "asc") => {
+  const compareValues = (key, order = 'asc') => {
     return (a, b) => {
       if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
         return 0;
       }
 
-      const varA = typeof a[key] === "string" ? a[key].toUpperCase() : a[key];
-      const varB = typeof b[key] === "string" ? b[key].toUpperCase() : b[key];
+      const varA = typeof a[key] === 'string' ? a[key].toUpperCase() : a[key];
+      const varB = typeof b[key] === 'string' ? b[key].toUpperCase() : b[key];
 
-      let comparison = 0;
+      let comparision = 0;
       if (varA > varB) {
         comparison = 1;
       } else if (varA < varB) {
         comparison = -1;
       }
-      return order === "desc" ? comparison * -1 : comparison;
+      return order === 'desc' ? comparison * -1 : comparison;
     };
   };
 
   res.json({
-    data: copy.sort(compareValues(head, order)).slice(first, second),
+    data:
+      head === ''
+        ? copy.slice(first, second)
+        : copy.sort(compareValues(head, order)).slice(first, second),
     page,
     pageCount
   });
@@ -82,4 +80,4 @@ app.post("/api/", (req, res) => {
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`app is running on port ${process.env.PORT}`);
-})
+});

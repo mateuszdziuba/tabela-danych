@@ -10,7 +10,6 @@ class Pagination extends React.Component {
     let startPage = 1;
     const pages = [];
     while (startPage <= pageCount) pages.push(startPage++);
-    console.log(currentPage, pageCount);
 
     return (
       <div className="container fixed-bottom ">

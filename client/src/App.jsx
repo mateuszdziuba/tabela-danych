@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import "./App.css";
-import UserTable from "./components/UserTable";
-import SearchBar from "./components/SearchBar";
-import Pagination from "./components/Pagination";
-import { debounce } from "lodash";
+import React, { Component } from 'react';
+import './App.css';
+import UserTable from './components/UserTable';
+import SearchBar from './components/SearchBar';
+import Pagination from './components/Pagination';
+import { debounce } from 'lodash';
 
 class App extends Component {
   constructor(props) {
@@ -11,18 +11,18 @@ class App extends Component {
 
     this.state = {
       users: [],
-      pageCount: "",
-      currentPage: "",
-      searchfield: "",
-      head: "",
-      order: ""
+      pageCount: '',
+      currentPage: '',
+      searchfield: '',
+      head: '',
+      order: ''
     };
     this.onSearchChange = debounce(this.onSearchChange, 400);
     this.search = this.search.bind(this);
   }
 
   componentDidMount() {
-    fetch("/api/")
+    fetch('/api/')
       .then(response => response.json())
       .then(data =>
         this.setState({
@@ -39,9 +39,9 @@ class App extends Component {
         searchfield: event.target.value
       },
       () => {
-        fetch("/api/", {
-          method: "post",
-          headers: { "Content-Type": "application/json" },
+        fetch('/api/', {
+          method: 'post',
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             searchfield: this.state.searchfield
           })
@@ -63,11 +63,11 @@ class App extends Component {
     this.onSearchChange(e);
   }
 
-  onPageChange = (currentPage) => {
+  onPageChange = currentPage => {
     this.setState({ currentPage }, () => {
-      fetch("/api/", {
-        method: "post",
-        headers: { "Content-Type": "application/json" },
+      fetch('/api/', {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           head: this.state.head,
           order: this.state.order,
@@ -91,9 +91,9 @@ class App extends Component {
       head,
       order
     });
-    fetch("/api/", {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
+    fetch('/api/', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         head,
         order,
