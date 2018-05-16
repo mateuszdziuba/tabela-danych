@@ -29,7 +29,7 @@ app.post('/api/', (req, res) => {
   const { head, order, searchfield, currentPage } = req.body;
 
   const filteredUsers = data.users.filter(user => {
-    return JSON.stringify(user)
+    return JSON.stringify(Object.values(user))
       .toLowerCase()
       .includes(searchfield.toLowerCase());
   });
@@ -67,8 +67,6 @@ app.post('/api/', (req, res) => {
       return order === 'desc' ? comparison * -1 : comparison;
     };
   };
-
-  console.log(head, order);
 
   res.json({
     data:

@@ -17,8 +17,7 @@ class App extends Component {
       head: '',
       order: ''
     };
-    this.onSearchChange = debounce(this.onSearchChange, 400);
-    this.search = this.search.bind(this);
+    this.onSearchChange = debounce(this.onSearchChange, 400)
   }
 
   componentDidMount() {
@@ -58,7 +57,7 @@ class App extends Component {
     );
   };
 
-  search(e) {
+  search = (e) => {
     e.persist();
     this.onSearchChange(e);
   }
